@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 5000;
 // Connect Database
 connectDB();
 
+app.use(express.json({ extended: false }));
+
 app.get('/', (req, res) => res.json({ msg: 'Hello from Contacts!' }));
 
 // Define Routes
