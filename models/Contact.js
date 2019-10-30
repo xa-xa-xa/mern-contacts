@@ -21,7 +21,7 @@ const ContactSchema = mongoose.Schema({
     type: String,
     default: 'personal'
   },
-  comment: {
+  comments: {
     type: String,
     default: 'no comments'
   },
