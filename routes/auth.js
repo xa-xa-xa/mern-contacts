@@ -5,14 +5,23 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../middleware/auth');
+
+const ERROR = err => console.log(err.message);
 
 /**
  * @route GET api/auth
  * @desc Get logged in user
  * @access Private
  */
-router.get('/', (req, res) => {
-  res.send('Get login a user');
+router.get('/', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (err) {
+    ERROR(err);
+    res.status(500).send('Server error');
+  }
 });
 
 /**
@@ -56,8 +65,8 @@ router.post(
           res.json({ token });
         }
       );
-    } catch (error) {
-      console.log(err.message);
+    } catch (err) {
+      ERROR(err);
       res.status(500).send('Server ERROR!');
     }
   }
