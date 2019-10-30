@@ -67,8 +67,33 @@ router.post(
  * @desc Update users contact
  * @access Private
  */
-router.put('/:id', (req, res) => {
-  res.send('Update users contact');
+router.put('/:id', auth, async (req, res) => {
+  const { name, email, phone, type, comments } = req.body;
+  // Build Contact Object
+  const contactFields = {};
+  if (name) contactField.name = name;
+  if (email) contactField.email = email;
+  if (phone) contactField.phone = phone;
+  if (type) contactField.type = type;
+  if (comments) contactField.comments = comments;
+
+  try {
+    let contact = await Contact.findById(req.params.id);
+    if (!contact) return res.status(404).json({ msg: 'Contact not found' });
+    // Make user owns a contact
+    if (contact.user.toString() !== req.user.id)
+      return res.status(401).json({ msg: 'Not authorized edit this contact' });
+
+    contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { $set: contactFields },
+      { new: true }
+    );
+    res.json(contact);
+  } catch (error) {
+    console.log('*: error', error);
+    res.status(500).send('Server Error');
+  }
 });
 
 /**
