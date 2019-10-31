@@ -20,7 +20,6 @@ router.get('/', auth, async (req, res) => {
     console.log('*: err', err.message);
     res.status(500).send('server error');
   }
-  res.send('Get all users contacts');
 });
 
 /**
@@ -53,9 +52,19 @@ router.post(
         comments,
         user: req.user.id
       });
+      const contact = await newContact;
+      const existingContact = await Contact.collection.findOne({
+        name: name
+      });
 
-      const contact = await newContact.save();
-      res.json(contact);
+      if (!existingContact) {
+        contact.save();
+        res.json(contact);
+      } else {
+        res.status(401).send({
+          msg: `Contact '${name}' already exist, please update and existing one or change this contact name.`
+        });
+      }
     } catch (error) {
       console.log('*: error', error);
       res.status(500).send('Server Error');
@@ -71,11 +80,11 @@ router.put('/:id', auth, async (req, res) => {
   const { name, email, phone, type, comments } = req.body;
   // Build Contact Object
   const contactFields = {};
-  if (name) contactField.name = name;
-  if (email) contactField.email = email;
-  if (phone) contactField.phone = phone;
-  if (type) contactField.type = type;
-  if (comments) contactField.comments = comments;
+  if (name) contactFields.name = name;
+  if (email) contactFields.email = email;
+  if (phone) contactFields.phone = phone;
+  if (type) contactFields.type = type;
+  if (comments) contactFields.comments = comments;
 
   try {
     let contact = await Contact.findById(req.params.id);
