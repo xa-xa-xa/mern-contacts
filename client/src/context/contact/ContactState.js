@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import uuid from 'uuid';
+import uuid from 'uuid/v1';
 import ContactContext from './contactContext';
 import contactReducer from './contactReducer';
 import {
@@ -16,19 +16,22 @@ const ContactState = props => {
   const initialState = {
     contacts: [
       {
-        id: 'Jill Popova',
+        id: uuid(),
+        name: 'Jill Popova',
         email: 'jill@mail.com',
         phone: '111-111-1111',
         type: 'professional'
       },
       {
-        id: 'Sara Ivanova',
+        id: uuid(),
+        name: 'Sara Ivanova',
         email: 'sara@mail.com',
         phone: '222-222-2222',
         type: 'personal'
       },
       {
-        id: 'Harry Potter',
+        id: uuid(),
+        name: 'Harry Potter',
         email: 'harry_p@mail.com',
         phone: '333-333-3333',
         type: 'personal'
