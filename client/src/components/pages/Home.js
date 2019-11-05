@@ -6,9 +6,7 @@ import ContactFilter from '../contacts/contactFilter';
 const Home = () => {
   return (
     <div className='grid-2'>
-      <div>
-        <ContactForm />
-      </div>
+      <ContactForm />
       <div>
         {' '}
         <h2 className='text-left text-center'>Contacts List:</h2>
