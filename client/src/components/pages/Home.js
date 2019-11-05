@@ -10,6 +10,8 @@ const Home = () => {
         <ContactForm />
       </div>
       <div>
+        {' '}
+        <h2 className='text-left text-center'>Contacts List:</h2>
         <ContactFilter />
         <Contacts />
       </div>
