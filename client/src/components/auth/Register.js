@@ -27,10 +27,14 @@ const Register = () => {
 
   return (
     <div className='form-container'>
-      <h1 className='text-primary'>Account</h1>
+      <h1>
+        <span className='text-primary'>Create </span>Account
+      </h1>
       <form onSubmit={onsubmit}>
         <div className='form-group'>
-          <label htmlFor='name'>Name</label>
+          <label htmlFor='name' className='text-primary'>
+            Name
+          </label>
           <input
             type='text'
             name='name'
@@ -40,7 +44,9 @@ const Register = () => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='email'>Email</label>
+          <label htmlFor='email' className='text-primary'>
+            Email
+          </label>
           <input
             type='email'
             name='email'
@@ -50,7 +56,9 @@ const Register = () => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='name'>Password</label>
+          <label htmlFor='name' className='text-primary'>
+            Password
+          </label>
           <input
             type='text'
             name='password'
@@ -60,7 +68,9 @@ const Register = () => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='name'>Repeat your password</label>
+          <label htmlFor='name' className='text-primary'>
+            Repeat your password
+          </label>
           <input
             type='text'
             name='password2'
