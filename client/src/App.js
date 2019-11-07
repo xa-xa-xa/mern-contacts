@@ -10,6 +10,7 @@ import Register from './components/auth/Register';
 import AuthState from './context/auth/AuthState';
 import ContactState from './context/contact/ContactState';
 import AlertState from './context/alerts/AlertState';
+import Alerts from './components/layout/Alerts';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Fragment>
               <Navbar />
               <div className='container'>
+                <Alerts />
                 <Switch>
                   <Route exact path='/' component={Home} />
                   <Route exact path='/about' component={About} />

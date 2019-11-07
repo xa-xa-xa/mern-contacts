@@ -1,15 +1,16 @@
 import React, { useReducer } from 'react';
+
+import uuid from 'uuid/v4';
+
 import AlertContext from './alertContext';
 import alertReducer from './alertReducer';
 import { SET_ALERT, REMOVE_ALERT } from '../types';
-
-import uuid from 'uuid/v4';
 
 const AlertState = props => {
   const initialState = [];
 
   const [state, dispatch] = useReducer(alertReducer, initialState);
-  // Set User
+  // Set Alert
   const setAlert = (msg, type, timeout = 5000) => {
     const id = uuid();
 
