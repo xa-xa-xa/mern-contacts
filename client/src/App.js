@@ -15,7 +15,7 @@ import Alerts from './components/layout/Alerts';
 const App = () => {
   return (
     <ContactState>
-      <ContactState>
+      <AuthState>
         <AlertState>
           <Router>
             <Fragment>
@@ -32,7 +32,7 @@ const App = () => {
             </Fragment>
           </Router>
         </AlertState>
-      </ContactState>
+      </AuthState>
     </ContactState>
   );
 };
