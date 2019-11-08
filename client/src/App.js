@@ -12,6 +12,10 @@ import ContactState from './context/contact/ContactState';
 import AlertState from './context/alerts/AlertState';
 import Alerts from './components/layout/Alerts';
 
+import setAuthToken from './utils/setAuthToken';
+
+if (localStorage.token) setAuthToken(localStorage.token);
+
 const App = () => {
   return (
     <ContactState>
