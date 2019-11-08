@@ -5,17 +5,17 @@ import AuthContext from '../../context/auth/authContext';
 const Register = () => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
-  const { registerUser, error, clearErrors } = authContext;
 
   const { setAlert } = alertContext;
+  const { registerUser, error, clearErrors } = authContext;
+
   useEffect(() => {
     if (error === 'User already exist!') {
       setAlert(error, 'danger');
-      console.log('error', error);
       clearErrors();
     }
     return () => {};
-  }, []);
+  }, [error]);
 
   const [user, setUser] = useState({
     name: '',
@@ -77,7 +77,7 @@ const Register = () => {
             Password
           </label>
           <input
-            type='text'
+            type='password'
             name='password'
             value={password}
             id=''
@@ -89,7 +89,7 @@ const Register = () => {
             Repeat your password
           </label>
           <input
-            type='text'
+            type='password'
             name='password2'
             value={password2}
             id=''
