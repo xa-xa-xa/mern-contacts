@@ -2,20 +2,23 @@ import React, { useState, useContext, useEffect } from 'react';
 import AlertContext from '../../context/alerts/alertContext';
 import AuthContext from '../../context/auth/authContext';
 
-const Register = () => {
+const Register = props => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
 
   const { setAlert } = alertContext;
-  const { registerUser, error, clearErrors } = authContext;
+  const { registerUser, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
+    if (isAuthenticated) props.history.push('/');
+
     if (error === 'User already exist!') {
       setAlert(error, 'danger');
       clearErrors();
     }
     return () => {};
-  }, [error]);
+    // eslint-disable-next-line
+  }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
     name: '',
@@ -23,6 +26,7 @@ const Register = () => {
     password: '',
     password2: ''
   });
+
   const onsubmit = e => {
     e.preventDefault();
     if (name === '' || email === '' || password === '' || password2 === '') {
@@ -52,25 +56,13 @@ const Register = () => {
           <label htmlFor='name' className='text-primary'>
             Name
           </label>
-          <input
-            type='text'
-            name='name'
-            value={name}
-            id=''
-            onChange={onchange}
-          />
+          <input type='text' name='name' value={name} onChange={onchange} />
         </div>
         <div className='form-group'>
           <label htmlFor='email' className='text-primary'>
             Email
           </label>
-          <input
-            type='email'
-            name='email'
-            value={email}
-            id=''
-            onChange={onchange}
-          />
+          <input type='email' name='email' value={email} onChange={onchange} />
         </div>
         <div className='form-group'>
           <label htmlFor='name' className='text-primary'>
@@ -79,8 +71,8 @@ const Register = () => {
           <input
             type='password'
             name='password'
+            autoComplete='password'
             value={password}
-            id=''
             onChange={onchange}
           />
         </div>
@@ -91,8 +83,8 @@ const Register = () => {
           <input
             type='password'
             name='password2'
+            autoComplete='password2'
             value={password2}
-            id=''
             onChange={onchange}
           />
         </div>
