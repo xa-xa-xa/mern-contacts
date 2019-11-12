@@ -7,7 +7,7 @@ import About from './components/pages/About';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
-import AuthState from './context/auth/AuthState';
+import AuthState from './context/auth/authState';
 import ContactState from './context/contact/ContactState';
 import AlertState from './context/alerts/AlertState';
 import Alerts from './components/layout/Alerts';
