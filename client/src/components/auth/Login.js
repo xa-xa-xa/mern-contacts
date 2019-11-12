@@ -22,7 +22,8 @@ const Login = props => {
     email: '',
     password: ''
   });
-  const onsubmit = e => {
+
+  const onSubmit = e => {
     e.preventDefault();
     if (email === '' || password === '') {
       setAlert('Please enter your email and password!', 'danger');
@@ -32,15 +33,15 @@ const Login = props => {
   };
 
   const { email, password } = user;
-  const onchange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
   return (
     <div className='form-container'>
       <h1 className='text-primary'>Login in</h1>
-      <form onSubmit={onsubmit}>
+      <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
-          <input type='email' name='email' value={email} onChange={onchange} />
+          <input type='email' name='email' value={email} onChange={onChange} />
         </div>
         <div className='form-group'>
           <label htmlFor='name'>Password</label>
@@ -49,7 +50,7 @@ const Login = props => {
             name='password'
             value={password}
             autoComplete='password'
-            onChange={onchange}
+            onChange={onChange}
           />
         </div>
 
