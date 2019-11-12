@@ -11,12 +11,7 @@ const ContactForm = () => {
   };
 
   const contactContext = useContext(ContactContext);
-  const {
-    addContact,
-    current,
-    clearCurrentContact,
-    updateCurrentContact
-  } = contactContext;
+  const { current, clearCurrentContact, updateCurrentContact } = contactContext;
 
   useEffect(() => {
     if (current) {
@@ -24,6 +19,7 @@ const ContactForm = () => {
     } else {
       setContact(initialContactState);
     }
+    // eslint-disable-next-line
   }, [contactContext, current]);
 
   // Component Level State

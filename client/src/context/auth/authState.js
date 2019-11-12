@@ -11,7 +11,8 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   CLEAR_ERRORS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from '../types';
 
 const AuthState = props => {
@@ -30,7 +31,6 @@ const AuthState = props => {
 
     try {
       const res = await axios.get('/api/auth');
-      console.log('res.data: ', res.data);
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (error) {
       dispatch({ type: AUTH_ERROR });
@@ -82,7 +82,7 @@ const AuthState = props => {
   };
 
   // Logout
-  const logout = params => {};
+  const logout = () => dispatch({ type: LOGOUT });
 
   // CLear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
