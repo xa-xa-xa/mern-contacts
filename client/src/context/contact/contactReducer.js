@@ -9,10 +9,10 @@ import {
   CONTACT_ERROR,
   GET_CONTACTS,
   CLEAR_CONTACTS
-} from "../types";
+} from '../types';
 
 export default (state, action) => {
-  console.log("*: action.type", action.type);
+  console.log('*: action.type', action.type);
 
   switch (action.type) {
     case GET_CONTACTS:
@@ -50,14 +50,14 @@ export default (state, action) => {
       return {
         ...state,
         contacts: state.contacts.map(contact =>
-          contact.id === action.payload.id ? action.payload : contact
+          contact._id === action.payload._id ? action.payload : contact
         )
       };
     case FILTER_CONTACTS:
       return {
         ...state,
         filtered: state.contacts.filter(contact => {
-          const regex = new RegExp(`${action.payload}`, "gi");
+          const regex = new RegExp(`${action.payload}`, 'gi');
           return contact.name.match(regex) || contact.email.match(regex);
         })
       };
