@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
 const About = () => {
   return (
     <div>
       <h1>About this app</h1>
-      <p className='my-1'>
-        This is full stack React app for managing and keeping you contacts
+      <p className="my-1">
+        This is full stack app for managing and keeping you contacts
       </p>
-      <p className='bg-dark p'>
+      <p className="bg-dark p">
         <strong>Version: </strong>1.0.0
       </p>
     </div>

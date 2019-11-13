@@ -1,23 +1,33 @@
-import React, { Fragment, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import AuthContext from '../../context/auth/authContext';
+import React, { Fragment, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import AuthContext from "../../context/auth/authContext";
+import ContactContext from "../../context/contact/contactContext";
 
 const Navbar = ({ title, icon }) => {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, logout, user } = authContext;
+  const contactContext = useContext(ContactContext);
+
+  const { isAuthenticated, logout, user, loadUser } = authContext;
+  const { clearContacts } = contactContext;
+
+  useEffect(() => {
+    loadUser();
+    // eslint-disable-next-line
+  }, []);
 
   const onLogOut = () => {
     logout();
+    clearContacts();
   };
 
   const authLinks = (
     <Fragment>
       <li>Hello {user && `${user.name} `}</li>
       <li>
-        <span className='hide-sm'> Log out</span>
-        <a onClick={onLogOut} href='#!'>
-          <i className='fas fa-sign-out-alt' />
+        <span className="hide-sm"> Log out</span>
+        <a onClick={onLogOut} href="#!">
+          <i className="fas fa-sign-out-alt" />
         </a>
       </li>
     </Fragment>
@@ -26,23 +36,23 @@ const Navbar = ({ title, icon }) => {
   const guestLinks = (
     <Fragment>
       <li>
-        <Link to='/register'>Register</Link>
+        <Link to="/register">Register</Link>
       </li>
       <li>
-        <Link to='/login'>
-          Log in <i className='fas fa-sign-in-alt' />
+        <Link to="/login">
+          Log in <i className="fas fa-sign-in-alt" />
         </Link>
       </li>
     </Fragment>
   );
 
-  console.log('isAuthenticated: ', isAuthenticated);
-
   return (
     <div>
-      <div className='navbar bg-primary'>
+      <div className="navbar bg-primary">
         <h1>
-          <i className={icon}> {title}</i>
+          <Link to="/">
+            <i className={icon}> {title}</i>
+          </Link>
         </h1>
         <ul>
           {/* <li>
@@ -64,8 +74,8 @@ Navbar.propTypes = {
 };
 
 Navbar.defaultProps = {
-  title: 'Contacts',
-  icon: 'fa fa-id-card-alt'
+  title: "Contacts",
+  icon: "fa fa-id-card-alt"
 };
 
 export default Navbar;

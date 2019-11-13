@@ -14,7 +14,7 @@ const Contacts = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (!contacts.length) {
+  if (contacts !== null && !contacts.length === 0 && !loading) {
     return <h4>Please add contacts...</h4>;
   }
 
@@ -22,7 +22,7 @@ const Contacts = () => {
     <Fragment>
       {contacts !== null && !loading ? (
         <TransitionGroup>
-          {filtered
+          {filtered !== null
             ? filtered.map(contact => (
                 <CSSTransition
                   key={contact._id}
