@@ -1,9 +1,11 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
-import ContactContext from './contactContext';
-import contactReducer from './contactReducer';
+import React, { useReducer } from "react";
+import axios from "axios";
+import ContactContext from "./contactContext";
+import contactReducer from "./contactReducer";
 import {
   ADD_CONTACT,
+  GET_CONTACTS,
+  CLEAR_CONTACTS,
   DELETE_CONTACT,
   SET_CURRENT,
   CLEAR_CURRENT,
@@ -11,7 +13,7 @@ import {
   FILTER_CONTACTS,
   CLEAR_FILTER,
   CONTACT_ERROR
-} from '../types';
+} from "../types";
 
 const ContactState = props => {
   const initialState = {
@@ -23,16 +25,27 @@ const ContactState = props => {
 
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
+  // GET Contacts
+
+  const getContacts = async () => {
+    try {
+      const res = await axios.get("api/contacts");
+      dispatch({ type: GET_CONTACTS, payload: res.data });
+    } catch (err) {
+      dispatch({ type: CONTACT_ERROR, payload: err.msg });
+    }
+  };
+
   // ADD Contact
   const addContact = async contact => {
     const config = {
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     };
 
     try {
-      const res = await axios.post('api/contacts', contact, config);
+      const res = await axios.post("api/contacts", contact, config);
       dispatch({ type: ADD_CONTACT, payload: res.data });
     } catch (err) {
       dispatch({ type: CONTACT_ERROR, payload: err.response.msg });
@@ -79,8 +92,10 @@ const ContactState = props => {
         clearCurrentContact,
         updateCurrentContact,
         filterContacts,
-        clearFilter
-      }}>
+        clearFilter,
+        getContacts
+      }}
+    >
       {props.children}
     </ContactContext.Provider>
   );
