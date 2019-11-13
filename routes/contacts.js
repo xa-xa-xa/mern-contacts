@@ -102,7 +102,7 @@ router.put("/:id", auth, async (req, res) => {
  */
 router.delete("/:id", (req, res, next) => {
   try {
-    Contact.deleteOne({ _id: req.params.id }).then(() => {
+    Contact.findOneAndDelete({ _id: req.params.id }).then(() => {
       res.status(200).json({ message: "Deleted!" });
     });
   } catch (error) {

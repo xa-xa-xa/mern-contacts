@@ -1,0 +1,7 @@
+{
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+    "turboConsoleLog.quote": "'",
+    "editor.formatOnSave": true,
+    "terminal.integrated.cursorStyle": "line"
+}
