@@ -1,6 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
-import AuthContext from "../../context/auth/authContext";
-import AlertContext from "../../context/alerts/alertContext";
+import React, { useState, useContext, useEffect } from 'react';
+import AuthContext from '../../context/auth/authContext';
+import AlertContext from '../../context/alerts/alertContext';
 
 const Login = props => {
   const alertContext = useContext(AlertContext);
@@ -10,25 +10,25 @@ const Login = props => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push("/");
+      props.history.push('/');
     }
 
-    if (error === "Invalid Credentials") {
-      setAlert(error, "danger");
+    if (error === 'Invalid Credentials') {
+      setAlert(error, 'danger');
       clearErrors();
     }
     // eslint-disable-next-line
   }, [error, isAuthenticated, props.history]);
 
   const [user, setUser] = useState({
-    email: "",
-    password: ""
+    email: '',
+    password: ''
   });
 
   const onSubmit = e => {
     e.preventDefault();
-    if (email === "" || password === "") {
-      setAlert("Please enter your email and password!", "danger");
+    if (email === '' || password === '') {
+      setAlert('Please enter your email and password!', 'danger');
     } else {
       loginUser({ email, password });
     }
@@ -38,35 +38,35 @@ const Login = props => {
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
 
   return (
-    <div className="form-container">
-      <h1 className="text-primary">Login in</h1>
+    <div className='form-container'>
+      <h1 className='text-primary'>Login in</h1>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
+        <div className='form-group'>
+          <label htmlFor='email'>Email</label>
           <input
-            id="email"
-            type="email"
-            name="email"
+            id='email'
+            type='email'
+            name='email'
             value={email}
             onChange={onChange}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="name">Password</label>
+        <div className='form-group'>
+          <label htmlFor='name'>Password</label>
           <input
-            id="password"
-            type="password"
-            name="password"
+            id='password'
+            type='password'
+            name='password'
             value={password}
-            autoComplete="password"
+            autoComplete='password'
             onChange={onChange}
           />
         </div>
 
         <input
-          type="submit"
-          value="Login"
-          className="btn btn-primary btn-block"
+          type='submit'
+          value='Login'
+          className='btn btn-primary btn-block'
         />
       </form>
     </div>
