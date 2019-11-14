@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://askrasn:SashaK3162@mern-contacts-cluster-elu2n.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "BigSecret"
+}
