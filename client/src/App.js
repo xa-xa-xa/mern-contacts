@@ -20,7 +20,7 @@ import WakingUp from './components/layout/WakingUp';
 const App = () => {
   const [loading, setLoading] = useState(true);
 
-  fetch(`${API_URL}/waking-up`).then(res => {
+  fetch(`${API_URL}/login`).then(res => {
     if (res.ok) {
       return setLoading(false);
     }
