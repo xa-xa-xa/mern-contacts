@@ -24,4 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 const PORT = process.env.PORT || 5000;
 
+// Heroku load handler
+app.get('/waking-up', (req, res) => res.send('okay'));
+
 app.listen(PORT, () => console.log(`*** Server listening on port: ${PORT}`));
