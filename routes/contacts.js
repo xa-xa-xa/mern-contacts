@@ -50,6 +50,7 @@ router.post(
         email,
         type,
         comments,
+        photo,
         user: req.user.id
       });
 
@@ -75,6 +76,7 @@ router.put('/:id', auth, async (req, res) => {
   if (phone) contactFields.phone = phone;
   if (type) contactFields.type = type;
   if (comments) contactFields.comments = comments;
+  if (photo) contactFields.photo = photo;
 
   try {
     let contact = await Contact.findById(req.params.id);

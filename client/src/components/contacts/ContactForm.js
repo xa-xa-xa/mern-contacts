@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
+// import ImageUpload from './ImageUpload';
+import ContactImage from './contactImage';
 
 const ContactForm = () => {
   const initialContactState = {
@@ -7,7 +9,8 @@ const ContactForm = () => {
     email: '',
     phone: '',
     // description: '',
-    type: 'personal'
+    type: 'personal',
+    photo: {}
   };
 
   const contactContext = useContext(ContactContext);
@@ -25,13 +28,26 @@ const ContactForm = () => {
   // Component Level State
   const [contact, setContact] = useState(initialContactState);
 
-  const { name, email, phone, type } = contact;
+  const { name, email, phone, type, photo } = contact;
 
   const onChange = e =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
+  // Upload Photo
+  const setPhoto = e =>
+    setContact({ ...contact, [e.target.name]: e.target.files[0] });
+
   const onSubmit = e => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.append('myImage', photo);
+    // const config = {
+    //   headers: {
+    //     'content-type': 'multipart/form-data'
+    //   }
+    // };
+
     if (!current) {
       contactContext.addContact(contact);
     } else {
@@ -44,9 +60,13 @@ const ContactForm = () => {
     clearCurrentContact();
   };
 
+  console.log(contact);
+
   return (
     <form className='text-primary' onSubmit={onSubmit}>
       <h2>{current ? 'Edit Contact' : 'Add Contact'}</h2>
+      <ContactImage path={photo} />
+      <input type='file' name='photo' onChange={setPhoto} />
       <input
         type='text'
         placeholder='Name'

@@ -51,6 +51,7 @@ const ContactState = props => {
     try {
       const res = await axios.post('api/contacts', contact, config);
       dispatch({ type: ADD_CONTACT, payload: res.data });
+      console.log('data:', res.data);
     } catch (err) {
       dispatch({ type: CONTACT_ERROR, payload: err.response.msg });
     }
@@ -122,8 +123,7 @@ const ContactState = props => {
         clearFilter,
         getContacts,
         clearContacts
-      }}
-    >
+      }}>
       {props.children}
     </ContactContext.Provider>
   );

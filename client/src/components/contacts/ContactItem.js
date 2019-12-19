@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import PropTypes from "prop-types";
-import ContactContext from "../../context/contact/contactContext";
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import ContactContext from '../../context/contact/contactContext';
+import ContactImage from './contactImage';
 
 const ContactItem = ({ contact }) => {
   const contactContext = useContext(ContactContext);
@@ -17,31 +18,30 @@ const ContactItem = ({ contact }) => {
   };
 
   return (
-    <div className="card bg-light">
-      <h3 className="text-primary text-left">
-        {name}{" "}
+    <div className='card bg-light'>
+      <ContactImage />
+      <h3 className='text-primary text-left'>
+        {name}{' '}
         <span
-          style={{ float: "right" }}
+          style={{ float: 'right' }}
           className={`badge badge-${
-            type === "professional" ? "success" : "primary"
-          }`}
-        >
+            type === 'professional' ? 'success' : 'primary'
+          }`}>
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </span>
       </h3>
-      <ul className="list">
-        {email && <li className="fas fa-envelope"> {email}</li>}
+      <ul className='list'>
+        {email && <li className='fas fa-envelope'> {email}</li>}
         <br />
-        {phone && <li className="fas fa-phone"> {phone}</li>}
+        {phone && <li className='fas fa-phone'> {phone}</li>}
       </ul>
       <p>
         <button
-          className="btn btn-dark btn-small"
-          onClick={() => setCurrentContact(contact)}
-        >
+          className='btn btn-dark btn-small'
+          onClick={() => setCurrentContact(contact)}>
           Edit
         </button>
-        <button className="btn btn-danger btn-small" onClick={onDelete}>
+        <button className='btn btn-danger btn-small' onClick={onDelete}>
           Delete
         </button>
       </p>

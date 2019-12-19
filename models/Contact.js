@@ -21,6 +21,10 @@ const ContactSchema = mongoose.Schema({
     type: String,
     default: 'personal'
   },
+  photo: {
+    type: Object,
+    require: false
+  },
   comments: {
     type: String,
     default: 'no comments'
