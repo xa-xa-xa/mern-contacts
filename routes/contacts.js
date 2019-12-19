@@ -42,7 +42,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, email, phone, type, comments } = req.body;
+    const { name, email, phone, type, comments, photo } = req.body;
     try {
       const newContact = new Contact({
         name,
@@ -56,6 +56,7 @@ router.post(
 
       const contact = await newContact.save();
       res.json(contact);
+      console.log('CONTACT: ', { contact });
     } catch (error) {
       console.log('*: error', error);
       res.status(500).send('Server Error');

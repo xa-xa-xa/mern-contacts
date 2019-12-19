@@ -33,20 +33,43 @@ const ContactForm = () => {
   const onChange = e =>
     setContact({ ...contact, [e.target.name]: e.target.value });
 
+  /// Check photo size and format
+  const alertMsg = photo => {
+    const types = ['image/png', 'image/jpeg', 'image/gif'];
+
+    if (types.every(type => photo.type !== type)) {
+      alert(`${photo.type} are not supported!`);
+      return;
+    }
+    if (photo.size > 1500000) {
+      alert(
+        `${photo.name} is too large please pick smaller photo (less than 1.5mb)`
+      );
+      return;
+    }
+    return false;
+  };
+
   // Upload Photo
-  const setPhoto = e =>
-    setContact({ ...contact, [e.target.name]: e.target.files[0] });
+  const setPhoto = e => {
+    const photoFile = e.target.files[0];
+    if (alertMsg(photoFile) === false)
+      setContact({ ...contact, [e.target.name]: e.target.files[0] });
+  };
 
   const onSubmit = e => {
     e.preventDefault();
 
     const formData = new FormData();
+
+    if (!alertMsg) setPhoto(e);
+
     formData.append('myImage', photo);
-    // const config = {
-    //   headers: {
-    //     'content-type': 'multipart/form-data'
-    //   }
-    // };
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    };
 
     if (!current) {
       contactContext.addContact(contact);
