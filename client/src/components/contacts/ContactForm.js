@@ -2,7 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import ContactContext from '../../context/contact/contactContext';
 // import ImageUpload from './ImageUpload';
 import ContactImage from './contactImage';
-
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 const ContactForm = () => {
   const initialContactState = {
     name: '',
@@ -30,9 +31,9 @@ const ContactForm = () => {
 
   const { name, email, phone, type, photo } = contact;
 
-  const onChange = e =>
+  const onChange = e => {
     setContact({ ...contact, [e.target.name]: e.target.value });
-
+  };
   /// Check photo size and format
   const alertMsg = photo => {
     const types = ['image/png', 'image/jpeg', 'image/gif'];
@@ -104,12 +105,18 @@ const ContactForm = () => {
         value={email}
         onChange={onChange}
       />
-      <input
-        type='phone'
+      <PhoneInput
+        type='text'
         placeholder='Phone'
+        country={'us'}
         name='phone'
         value={phone}
-        onChange={onChange}
+        onChange={e =>
+          setContact({
+            ...contact,
+            phone: e
+          })
+        }
       />
       <h5>Contact type</h5>
       <input
