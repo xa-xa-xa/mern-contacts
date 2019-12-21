@@ -52,7 +52,7 @@ const Navbar = ({ title, icon }) => {
         <h1>
           <Link to='/'>
             <span>
-              <img src='favicon.ico' className='logo' />
+              <img src='favicon.ico' alt='app logo' className='logo' />
             </span>{' '}
             {title}
           </Link>
