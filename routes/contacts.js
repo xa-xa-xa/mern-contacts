@@ -69,7 +69,7 @@ router.post(
  * @access Private
  */
 router.put('/:id', auth, async (req, res) => {
-  const { name, email, phone, type, comments } = req.body;
+  const { name, email, phone, type, comments, photo } = req.body;
   // Build Contact Object
   const contactFields = {};
   if (name) contactFields.name = name;
