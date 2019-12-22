@@ -5,7 +5,7 @@ import ContactImage from './contactImage';
 
 const ContactItem = ({ contact }) => {
   const contactContext = useContext(ContactContext);
-  const { name, email, phone, type, _id } = contact;
+  const { name, email, phone, type, _id, photo } = contact;
   const {
     deleteContact,
     setCurrentContact,
@@ -18,9 +18,9 @@ const ContactItem = ({ contact }) => {
   };
 
   return (
-    <div className='card bg-light'>
+    <div className='card bg-light shadow-sm m-1'>
       <ContactImage />
-      <h3 className='text-primary text-left'>
+      <h3 className='text-dark text-left'>
         {name}{' '}
         <span
           style={{ float: 'right' }}
@@ -33,7 +33,12 @@ const ContactItem = ({ contact }) => {
       <ul className='list'>
         {email && <li className='fas fa-envelope'> {email}</li>}
         <br />
-        {phone && <li className='fas fa-phone'> {phone}</li>}
+        {phone && (
+          <li className='fas fa-phone text-dark'>
+            {' '}
+            <span>{phone}</span>
+          </li>
+        )}
       </ul>
       <p>
         <button
